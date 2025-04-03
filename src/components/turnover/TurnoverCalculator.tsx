@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { toast } from 'sonner';
+import { toast } from '@/components/ui/use-toast';
 import TurnoverVisualization from './TurnoverVisualization';
 import TurnoverPdfExport from './TurnoverPdfExport';
 import TurnoverEmailShare from './TurnoverEmailShare';
@@ -89,10 +88,17 @@ const TurnoverCalculator = () => {
         
         setShowResults(true);
         setIsCalculating(false);
-        toast.success("Calculation completed successfully!");
+        toast({
+          title: "Success",
+          description: "Calculation completed successfully!"
+        });
       } catch (error) {
         console.error("Calculation error:", error);
-        toast.error("Error calculating results. Please check your inputs.");
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Error calculating results. Please check your inputs."
+        });
         setIsCalculating(false);
       }
     }, 800);
@@ -109,7 +115,9 @@ const TurnoverCalculator = () => {
     setAverageSalary(720000);
     setShowResults(false);
     setResults(initialResults);
-    toast.info("Calculator has been reset");
+    toast({
+      description: "Calculator has been reset"
+    });
   };
 
   return (

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
+import { toast } from '@/components/ui/use-toast';
 import { Download } from 'lucide-react';
 import { generatePDF } from '@/utils/pdfGenerator';
 
@@ -30,10 +30,17 @@ const TurnoverPdfExport: React.FC<TurnoverPdfExportProps> = ({ results, inputs }
     setIsGenerating(true);
     try {
       await generatePDF(results, inputs);
-      toast.success("PDF generated successfully");
+      toast({
+        title: "Success",
+        description: "PDF generated successfully"
+      });
     } catch (error) {
       console.error('PDF generation error:', error);
-      toast.error("Failed to generate PDF");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to generate PDF"
+      });
     } finally {
       setIsGenerating(false);
     }

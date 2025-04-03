@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Mail } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast } from '@/components/ui/use-toast';
 import { formatIndianRupee } from '@/utils/currencyFormatter';
 
 interface TurnoverEmailShareProps {
@@ -39,7 +39,10 @@ const TurnoverEmailShare: React.FC<TurnoverEmailShareProps> = ({ results, inputs
     // For now, we'll simulate the email sending process
     
     setTimeout(() => {
-      toast.success(`Report sent to ${email}`);
+      toast({
+        title: "Email Sent",
+        description: `Report sent to ${email}`
+      });
       setIsOpen(false);
       setEmail('');
       setIsSending(false);
